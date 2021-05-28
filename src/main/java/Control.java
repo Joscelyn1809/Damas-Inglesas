@@ -188,11 +188,11 @@ public class Control {
             if (filaOrigen + 1 == filaDest) {
                 //Si el movimiento es a la derecha
                 if (colOrigen - 1 == colDest) {
-                    fichasNegras.get(posFicha).mover(50, 50);
+                    fichasNegras.get(posFicha).mover(50, -50);
                     exito=true;
                 }
                 else if(colOrigen + 1 == colDest){
-                    fichasNegras.get(posFicha).mover(50, -50);
+                    fichasNegras.get(posFicha).mover(50, 50);
                     exito=true;
                 }
             }
@@ -203,7 +203,7 @@ public class Control {
                     casillas[filaOrigen+1][colOrigen-1].getColorDeLaFicha().equals("red")){
                     
                     //Se mueve la ficha
-                    fichasRojas.get(posFicha).mover(100, 100);
+                    fichasRojas.get(posFicha).mover(100, -100);
                     //Se desocupa la casilla de la ficha comida
                     casillas[filaOrigen+1][colOrigen-1].desocuparCasilla();
                     //Se borra la ficha comida
@@ -216,7 +216,7 @@ public class Control {
                     casillas[filaOrigen+1][colOrigen+1].getColorDeLaFicha().equals("red")){
                     
                     //Se mueve la ficha
-                    fichasNegras.get(posFicha).mover(100, -100);
+                    fichasNegras.get(posFicha).mover(100, 100);
                     //Se desocupa la casilla de la ficha comida
                     casillas[filaOrigen+1][colOrigen+1].desocuparCasilla();
                     //Se borra la ficha comida
