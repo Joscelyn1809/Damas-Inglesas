@@ -63,7 +63,7 @@ public class Checkers {
                 
             }
         }
-        System.out.println("FIN DEL JUEGO");
+        System.out.println("FIN DEL JUEGO!!");
         control.verificarGanador();
     }
 }
