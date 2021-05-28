@@ -15,7 +15,7 @@ public class Control {
 
     }
 
-    public void dibujarFichas() {
+    public void crearFichas() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 8; j++) {
                 if (casillas[i][j].getColor().equals("cafe")) {
@@ -74,19 +74,164 @@ public class Control {
     public static ArrayList<Rojas> getFichasRojas() {
         return fichasRojas;
     }
+    
+    public Rojas getFichaRoja(int x, int y){
+        Rojas fichaBuscar=null;
+        for(Rojas ficha:fichasRojas){
+            if(ficha.getxPosition()==x && ficha.getyPosition()==y)
+                fichaBuscar=ficha;
+        }
+        return fichaBuscar;
+    }
+    
+    public Negras getFichaNegra(int x, int y){
+        Negras fichaBuscar=null;
+        for(Negras ficha:fichasNegras){
+            if(ficha.getxPosition()==x && ficha.getyPosition()==y)
+                fichaBuscar=ficha;
+        }
+        return fichaBuscar;
+    }
+    
+    public void borrarFichaNegra(int x, int y){
+        Ficha fichaBorrar=null;
+        for(Negras ficha:fichasNegras){
+            if(ficha.getxPosition()==x && ficha.getyPosition()==y)
+                fichaBorrar=ficha;
+        }
+        int posFicha=fichasNegras.indexOf(fichaBorrar);
+        fichasNegras.get(posFicha).makeInvisible();
+    }
+    
+    public void borrarFichaRoja(int x, int y){
+        Ficha fichaBorrar=null;
+        for(Rojas ficha:fichasRojas){
+            if(ficha.getxPosition()==x && ficha.getyPosition()==y)
+                fichaBorrar=ficha;
+        }
+        int posFicha=fichasRojas.indexOf(fichaBorrar);
+        fichasRojas.get(posFicha).makeInvisible();
+    }
 
-    public void moverFichasRojas(int filaOrigen, int colOrigen, int filaDest, int colDest) {
-
-        if (!casillas[filaDest][colDest].isEstaOcupado()) {
+    public boolean moverFichaRoja(int filaOrigen, int colOrigen, int filaDest, int colDest) {
+        Casilla casillaOrigen=casillas[filaOrigen][colOrigen];
+        Casilla casillaDestino=casillas[filaDest][colDest];
+        Rojas ficha=getFichaRoja(casillaOrigen.getxPosition(),casillaOrigen.getyPosition());
+        boolean exito=false;
+        
+        
+        //Que la casilla destino no este ocupada y la ficha exista
+        if (!casillaDestino.isEstaOcupado() && ficha != null) {
+            //Como la ficha si existe, queremos saber en que pos del arraylist esta
+            int posFicha=fichasRojas.indexOf(ficha);
+            //Que el movimiento sea para avanzar
             if (filaOrigen - 1 == filaDest) {
+                //Si el movimiento es a la derecha
                 if (colOrigen + 1 == colDest) {
+                    fichasRojas.get(posFicha).mover(-60, 60);
+                    exito=true;
+                }
+                else if(colOrigen - 1 == colDest){
+                    fichasRojas.get(posFicha).mover(-60, -60);
+                    exito=true;
+                }
+            }
+            
+            else if(filaOrigen - 2 == filaDest){
+                if (colOrigen + 2 == colDest && 
+                    casillas[filaOrigen-1][colOrigen+1].isEstaOcupado() &&
+                    casillas[filaOrigen-1][colOrigen+1].getColorDeLaFicha().equals("black")){
                     
+                    //Se mueve la ficha
+                    fichasRojas.get(posFicha).mover(-120, 120);
+                    //Se desocupa la casilla de la ficha comida
+                    casillas[filaOrigen-1][colOrigen+1].desocuparCasilla();
+                    //Se borra la ficha comida
+                    Casilla casillaComida=casillas[filaOrigen-1][colOrigen+1];
+                    borrarFichaNegra(casillaComida.getxPosition(),casillaComida.getyPosition());
+                    exito=true;
+                }
+                else if (colOrigen - 2 == colDest && 
+                    casillas[filaOrigen-1][colOrigen-1].isEstaOcupado() &&
+                    casillas[filaOrigen-1][colOrigen-1].getColorDeLaFicha().equals("black")){
+                    
+                    //Se mueve la ficha
+                    fichasRojas.get(posFicha).mover(-120, -120);
+                    //Se desocupa la casilla de la ficha comida
+                    casillas[filaOrigen-1][colOrigen-1].desocuparCasilla();
+                    //Se borra la ficha comida
+                    Casilla casillaComida=casillas[filaOrigen-1][colOrigen-1];
+                    borrarFichaNegra(casillaComida.getxPosition(),casillaComida.getyPosition());
+                    exito=true;
                 }
             }
         }
+        
+        if(exito){
+            casillas[filaOrigen][colOrigen].desocuparCasilla();
+            casillas[filaDest][colDest].ocuparCasilla("red");
+        }
+        
+        return exito;
     }
 
-    public void moverFichasNegras(int filaOrigen, int colOrigen, int filaDest, int colDestino) {
-
+    public boolean moverFichasNegras(int filaOrigen, int colOrigen, int filaDest, int colDest) {
+        Casilla casillaOrigen=casillas[filaOrigen][colOrigen];
+        Casilla casillaDestino=casillas[filaDest][colDest];
+        Negras ficha=getFichaNegra(casillaOrigen.getxPosition(),casillaOrigen.getyPosition());
+        boolean exito=false;
+        
+        if (!casillaDestino.isEstaOcupado() && ficha != null) {
+            //Como la ficha si existe, queremos saber en que pos del arraylist esta
+            int posFicha=fichasNegras.indexOf(ficha);
+            //Que el movimiento sea para avanzar
+            if (filaOrigen + 1 == filaDest) {
+                //Si el movimiento es a la derecha
+                if (colOrigen - 1 == colDest) {
+                    fichasNegras.get(posFicha).mover(60, 60);
+                    exito=true;
+                }
+                else if(colOrigen + 1 == colDest){
+                    fichasNegras.get(posFicha).mover(60, -60);
+                    exito=true;
+                }
+            }
+            
+            else if(filaOrigen + 2 == filaDest){
+                if (colOrigen - 2 == colDest && 
+                    casillas[filaOrigen+1][colOrigen-1].isEstaOcupado() &&
+                    casillas[filaOrigen+1][colOrigen-1].getColorDeLaFicha().equals("red")){
+                    
+                    //Se mueve la ficha
+                    fichasRojas.get(posFicha).mover(120, 120);
+                    //Se desocupa la casilla de la ficha comida
+                    casillas[filaOrigen+1][colOrigen-1].desocuparCasilla();
+                    //Se borra la ficha comida
+                    Casilla casillaComida=casillas[filaOrigen+1][colOrigen-1];
+                    borrarFichaRoja(casillaComida.getxPosition(),casillaComida.getyPosition());
+                    exito=true;
+                }
+                else if (colOrigen + 2 == colDest && 
+                    casillas[filaOrigen+1][colOrigen+1].isEstaOcupado() &&
+                    casillas[filaOrigen+1][colOrigen+1].getColorDeLaFicha().equals("red")){
+                    
+                    //Se mueve la ficha
+                    fichasNegras.get(posFicha).mover(120, -120);
+                    //Se desocupa la casilla de la ficha comida
+                    casillas[filaOrigen+1][colOrigen+1].desocuparCasilla();
+                    //Se borra la ficha comida
+                    Casilla casillaComida=casillas[filaOrigen+1][colOrigen+1];
+                    borrarFichaRoja(casillaComida.getxPosition(),casillaComida.getyPosition());
+                    exito=true;
+                }
+            }
+        }
+        
+        if(exito){
+            casillas[filaOrigen][colOrigen].desocuparCasilla();
+            casillas[filaDest][colDest].ocuparCasilla("black");
+        }
+        
+        return exito;
     }
 }

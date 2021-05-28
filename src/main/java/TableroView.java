@@ -1,11 +1,7 @@
 
 public class TableroView {
-
-    private Square casillas[][];
-    public static final char[] COLUMNAS = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'};
-
+    
     public TableroView() {
-        casillas = new Square[8][8];
     }
 
     public void dibujarTablero() {
@@ -23,8 +19,5 @@ public class TableroView {
         for (Rojas ro : Control.getFichasRojas()) {
             ro.makeVisible();
         }
-        
-
     }
-
 }

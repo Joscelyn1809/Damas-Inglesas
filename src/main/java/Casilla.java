@@ -20,7 +20,7 @@ public class Casilla extends Square {
         this.colorDeLaFicha = colorDeLaFicha; 
     }
 
-    public void desocuparCasilla(String colorDeLaFicha) {
+    public void desocuparCasilla() {
         estaOcupado = false;
         colorDeLaFicha = "";
     }
