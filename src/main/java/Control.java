@@ -125,25 +125,25 @@ public class Control {
             //Como la ficha si existe, queremos saber en que pos del arraylist esta
             int posFicha=fichasRojas.indexOf(ficha);
             //Que el movimiento sea para avanzar
-            if (filaOrigen - 1 == filaDest) {
+            if (filaOrigen + 1 == filaDest) {
                 //Si el movimiento es a la derecha
-                if (colOrigen + 1 == colDest) {
-                    fichasRojas.get(posFicha).mover(-60, 60);
+                if (colOrigen - 1 == colDest) {
+                    fichasRojas.get(posFicha).mover(-50, 50);
                     exito=true;
                 }
-                else if(colOrigen - 1 == colDest){
-                    fichasRojas.get(posFicha).mover(-60, -60);
+                else if(colOrigen + 1 == colDest){
+                    fichasRojas.get(posFicha).mover(-50, -50);
                     exito=true;
                 }
             }
             
-            else if(filaOrigen - 2 == filaDest){
-                if (colOrigen + 2 == colDest && 
-                    casillas[filaOrigen-1][colOrigen+1].isEstaOcupado() &&
-                    casillas[filaOrigen-1][colOrigen+1].getColorDeLaFicha().equals("black")){
+            else if(filaOrigen + 2 == filaDest){
+                if (colOrigen - 2 == colDest && 
+                    casillas[filaOrigen+1][colOrigen-1].isEstaOcupado() &&
+                    casillas[filaOrigen+1][colOrigen-1].getColorDeLaFicha().equals("black")){
                     
                     //Se mueve la ficha
-                    fichasRojas.get(posFicha).mover(-120, 120);
+                    fichasRojas.get(posFicha).mover(-100, 100);
                     //Se desocupa la casilla de la ficha comida
                     casillas[filaOrigen-1][colOrigen+1].desocuparCasilla();
                     //Se borra la ficha comida
@@ -151,16 +151,16 @@ public class Control {
                     borrarFichaNegra(casillaComida.getxPosition(),casillaComida.getyPosition());
                     exito=true;
                 }
-                else if (colOrigen - 2 == colDest && 
-                    casillas[filaOrigen-1][colOrigen-1].isEstaOcupado() &&
-                    casillas[filaOrigen-1][colOrigen-1].getColorDeLaFicha().equals("black")){
+                else if (colOrigen + 2 == colDest && 
+                    casillas[filaOrigen+1][colOrigen+1].isEstaOcupado() &&
+                    casillas[filaOrigen+1][colOrigen+1].getColorDeLaFicha().equals("black")){
                     
                     //Se mueve la ficha
-                    fichasRojas.get(posFicha).mover(-120, -120);
+                    fichasRojas.get(posFicha).mover(-100, -100);
                     //Se desocupa la casilla de la ficha comida
-                    casillas[filaOrigen-1][colOrigen-1].desocuparCasilla();
+                    casillas[filaOrigen+1][colOrigen+1].desocuparCasilla();
                     //Se borra la ficha comida
-                    Casilla casillaComida=casillas[filaOrigen-1][colOrigen-1];
+                    Casilla casillaComida=casillas[filaOrigen+1][colOrigen+1];
                     borrarFichaNegra(casillaComida.getxPosition(),casillaComida.getyPosition());
                     exito=true;
                 }
