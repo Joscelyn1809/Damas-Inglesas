@@ -8,7 +8,7 @@ public class Ficha extends Circle {
     }
 
     public void mover(int x, int y) {
-        moveHorizontal(x);
-        moveVertical(y);
+        moveHorizontal(y);
+        moveVertical(x);
     }
 }
