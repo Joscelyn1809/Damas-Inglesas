@@ -29,7 +29,7 @@ public class Checkers {
             
             //Se lee la columna de la ficha a mover
             System.out.println("Ingrese columna de ficha a mover(a-h): ");
-            String col=scan.nextLine().toLowerCase();
+            String col=scan.nextLine().toUpperCase();
             char columnaOrigen=col.toCharArray()[0];//Esta es la columna a mover
             
             //Se lee la fila de la casilla destino
@@ -39,7 +39,7 @@ public class Checkers {
             
             //Se lee la columna del destino
             System.out.println("Ingrese columna de ficha a mover(a-h): ");
-            col=scan.nextLine().toLowerCase();
+            col=scan.nextLine().toUpperCase();
             char colDest=col.toCharArray()[0];//Esta es la columna destino
             
             int posColOrigen = new String(Control.COLUMNAS).indexOf(columnaOrigen);
