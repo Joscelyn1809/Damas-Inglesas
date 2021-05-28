@@ -108,4 +108,8 @@ public class Circle {
     public int getyPosition() {
         return yPosition;
     }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
 }

@@ -12,7 +12,6 @@ public class Control {
         fichasNegras = new ArrayList();
         fichasRojas = new ArrayList();
         casillas = new Casilla[8][8];
-
     }
 
     public void crearFichas() {
@@ -233,5 +232,28 @@ public class Control {
         }
         
         return exito;
+    }
+    
+    public void verificarGanador(){
+        int contRojas=0,contNegras=0;
+        
+        for(Rojas roja : fichasRojas){
+            if(roja.isVisible()){
+                contRojas++;
+            }
+        }
+        
+        for(Negras negra : fichasNegras){
+            if(negra.isVisible()){
+                contNegras++;
+            }
+        }
+        
+        if(contRojas>contNegras){
+            System.out.println("ROJAS ES EL GANADOR!");
+        }else if(contNegras>contRojas){
+            System.out.println("NEGRAS ES EL GANADOR!");
+        }
+        else System.out.println("EMPATE!");
     }
 }

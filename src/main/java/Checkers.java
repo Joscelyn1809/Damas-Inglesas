@@ -9,8 +9,6 @@ public class Checkers {
         Control control = new Control();
         Scanner scan=new Scanner(System.in);
         
-        System.out.println("Bienvenido a Damas Inglesas");
-        
         control.crearTablero();
         tab.dibujarTablero();
         control.crearFichas();
@@ -18,7 +16,9 @@ public class Checkers {
         
         boolean turno=true;
         
-        for(int i=0;i<3;i++){
+        System.out.println("Bienvenido a Damas Inglesas");
+        
+        for(int i=0;i<5;i++){
             if(turno) System.out.println("\n\f\tTURNO DE ROJAS.");
             else System.out.println("\n\f\tTURNO DE NEGRAS.");
             
@@ -63,5 +63,7 @@ public class Checkers {
                 
             }
         }
+        System.out.println("FIN DEL JUEGO");
+        control.verificarGanador();
     }
 }
