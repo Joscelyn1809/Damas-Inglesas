@@ -74,5 +74,19 @@ public class Control {
     public static ArrayList<Rojas> getFichasRojas() {
         return fichasRojas;
     }
-    
+
+    public void moverFichasRojas(int filaOrigen, int colOrigen, int filaDest, int colDest) {
+
+        if (!casillas[filaDest][colDest].isEstaOcupado()) {
+            if (filaOrigen - 1 == filaDest) {
+                if (colOrigen + 1 == colDest) {
+                    
+                }
+            }
+        }
+    }
+
+    public void moverFichasNegras(int filaOrigen, int colOrigen, int filaDest, int colDestino) {
+
+    }
 }
