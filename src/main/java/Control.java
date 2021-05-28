@@ -202,7 +202,7 @@ public class Control {
                     casillas[filaOrigen+1][colOrigen-1].getColorDeLaFicha().equals("red")){
                     
                     //Se mueve la ficha
-                    fichasRojas.get(posFicha).mover(100, -100);
+                    fichasNegras.get(posFicha).mover(100, -100);
                     //Se desocupa la casilla de la ficha comida
                     casillas[filaOrigen+1][colOrigen-1].desocuparCasilla();
                     //Se borra la ficha comida
